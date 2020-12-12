@@ -21,8 +21,6 @@ jobs:
       - run: mkdir "$HOME/.ssh"
       - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
-      - run: echo ssh-keyscan "${{secrets.DEPLOY_SERVER}}" > "$HOME/.ssh/known_hosts"
-      - run: chmod 600 "$HOME/.ssh/known_hosts"
       # Build
       - run: npm ci
       - run: cd server && npm ci
@@ -31,4 +29,4 @@ jobs:
       - run: cd ..
       - run: npm run client:build
       # Deploy
-      - run: cd client && cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
+      - run: cd client && cd build && rsync -e "ssh -i $HOME/.ssh/key" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build

@@ -126,7 +126,7 @@ export default {
               year: values.date.year(),
               month: values.date.month(),
               day: values.date.date(),
-              time:` ${values.date.hour()} : ${values.date.minutes() === '0' ? '00' : values.date.minutes()}`,
+              time: `${values.date.hour()} : ${values.date.minutes()}`,
               body: values.description,
 
             }

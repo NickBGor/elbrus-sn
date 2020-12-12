@@ -81,7 +81,7 @@ const LayoutComponent = () => {
                 <a
                   href={`${process.env.REACT_APP_URL_DEFAULT}:4000/events?role=${user.status}`}
                 >
-                  Эвенты
+                  Эвенты не работают
                 </a>
               </Menu.Item>
               {user.status === 'Гость' ? null : (

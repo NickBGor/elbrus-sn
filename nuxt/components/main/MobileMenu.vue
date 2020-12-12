@@ -41,7 +41,7 @@
           </nuxt-link>
         </li>
         <li class="mob-menu__item">
-          <a class="mob-menu__item-link" href="http://localhost:3000">Личный кабинет</a>
+          <a class="mob-menu__item-link" href="http://elbrus.space:90">Личный кабинет</a>
         </li>
       </ul>
     </div>

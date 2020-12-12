@@ -28,6 +28,5 @@ jobs:
       - run: cd client && npm ci
       - run: cd ..
       - run: npm run client:build
-      - run: ssh-keygen -R 84.38.181.170
       # Deploy
       - run: cd client && cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build

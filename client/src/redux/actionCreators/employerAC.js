@@ -8,6 +8,7 @@ import {
   CHANGE_STATE,
   CLEAR_EMPLOYERS,
   CREATE_EMPLOYER,
+  DELETE_EMPLOYER,
   DELETE_REVIEW,
   GET_EMPLOYERS,
 } from '../actionTypes/types';
@@ -83,6 +84,13 @@ export const changeState = payload => {
 export const deleteReview = payload => {
   return {
     type: DELETE_REVIEW,
+    payload,
+  };
+};
+
+export const deleteEmployer = payload => {
+  return {
+    type: DELETE_EMPLOYER,
     payload,
   };
 };

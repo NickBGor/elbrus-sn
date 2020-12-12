@@ -1,64 +1,38 @@
-.profileTop {
-  display: flex;
-  justify-content: space-around;
-}
-
 .header {
-  display: flex;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.lvl {
+  color: var(--purple_color);
+  margin-top: 10px;
+  font-weight: bolder;
   justify-content: center;
 }
 
-.containerForUserPhoto {
-  width: 20em;
-  height: 20em;
-  z-index: 0;
-  text-align: center;
+.h2 {
+  color: var(--purple_color);
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
-.userPhoto {
-  border-radius: 50%;
-  max-height: 20em;
-  z-index: 1;
+.status {
+  color: var(--purple_color);
+  font-size: large;
 }
 
-.userName {
-  margin: 1em 3em 0 3em;
+.divider span {
+  color: var(--purple_color);
+  font-size: large;
+  margin-top: 10px;
 }
 
-.userGeneralInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  text-align: center;
+.divider::after {
+  color: var(--orange_color);
+  margin-top: 10px;
 }
 
-.userStatus {
-  margin: 0 auto;
-  width: 50%;
-  border-top: solid 1px orange;
-  border-bottom: solid 1px orange;
-}
-
-.skills {
-  padding: 1em;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  border-top: solid 1px orange;
-  border-bottom: solid 1px orange;
-}
-
-.label {
-  color: orange;
-}
-
-.tag {
-  margin: 0.2em;
-}
-
-.buttonEdit {
-  display: flex;
-  justify-content: space-between;
+.divider::before {
+  color: var(--orange_color);
+  margin-top: 10px;
 }

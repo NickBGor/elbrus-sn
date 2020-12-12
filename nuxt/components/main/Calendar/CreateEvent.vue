@@ -155,4 +155,8 @@ export default {
     bottom: 200px;
   }
 }
+
+.ant-calendar-picker {
+  width: 100%;
+}
 </style>

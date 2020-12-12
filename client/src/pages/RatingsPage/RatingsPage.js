@@ -8,12 +8,17 @@ import {
 } from '../../redux/actionCreators/ratingAC';
 import { Link } from 'react-router-dom';
 import PaginationComponent from '../../components/Pagination/PaginationComponent';
+import style from './RatingsPage.module.css';
 
 const RatingsPage = () => {
   const students = useSelector(state =>
     state.rating.allUsers.sort((a, b) => b.rating - a.rating),
   );
-  const filteredStudents = useSelector(state => state.rating.filteredUsers);
+  const filteredStudents = useSelector(state =>
+    state.rating.filteredUsers.filter(
+      el => el.status === 'Выпускник' || el.status === 'Студент',
+    ),
+  );
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
@@ -49,7 +54,7 @@ const RatingsPage = () => {
           <InputComponent
             onChange={searchOfStudent}
             size="large"
-            placeholder="Search of student"
+            placeholder="Поиск по имени"
             span="24"
             justify="left"
             offset="0"
@@ -61,10 +66,11 @@ const RatingsPage = () => {
               <List.Item>
                 <List.Item.Meta
                   avatar={<Avatar src={student.photo} />}
+                  className={style.link}
                   title={
                     <Link to={`/student/${student._id}`}>{student.name}</Link>
                   }
-                  description={`Рейтинг: ${student.rating} Группа: ${student.group}`}
+                  description={`Рейтинг: ${student.rating} Группа: ${student.group} Статус: ${student.status}`}
                 />
               </List.Item>
             )}

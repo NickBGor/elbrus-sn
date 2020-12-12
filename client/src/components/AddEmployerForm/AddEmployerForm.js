@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Row, Col, message } from 'antd';
 import { hideErrorAC } from '../../redux/actionCreators/appAC';
+import style from './AddEmployerForm.module.css';
 
 const AddEmployerForm = () => {
   const [rating, changeRating] = useState(0);
@@ -29,10 +30,7 @@ const AddEmployerForm = () => {
     } = e.target;
     const userName = user.name;
     const userId = user._id;
-    const userPhoto = user.photo;
-    dispatch(
-      createEmployer({ name, review, rating, userName, userId, userPhoto }),
-    );
+    dispatch(createEmployer({ name, review, rating, userName, userId }));
   };
 
   if (errors.isError) {
@@ -69,7 +67,9 @@ const AddEmployerForm = () => {
             placeholder="Твоё мнение о данной организации"
             minRows={2}
           />
-          <ButtonComponent title="Добавить" />
+          <div className={style.btn}>
+            <ButtonComponent title="Добавить" />
+          </div>
         </form>
       </Col>
     </Row>

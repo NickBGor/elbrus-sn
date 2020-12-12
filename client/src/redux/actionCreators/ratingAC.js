@@ -37,5 +37,10 @@ export const defaultChangeRatingAC = payload => {
     type: DEFAULT_CHANGE_RATING,
     id: payload._id,
     rating: payload.rating,
+    name: payload.name,
+    email: payload.email,
+    skills: payload.skills,
+    group: payload.group,
+    status: payload.status,
   };
 };

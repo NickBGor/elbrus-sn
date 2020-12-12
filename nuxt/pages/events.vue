@@ -1,37 +1,38 @@
 <template>
-<div class="container ">
-  <h1>Календарь мероприятий</h1>
+  <a-row>
+    <a-col :sm="{offset: 2, span: 20}">
+      <h1 class="text-center">Календарь мероприятий</h1>
 
-  <a-calendar :locale="locale">
-    <ul slot="dateCellRender" slot-scope="value" class="events">
-      <Event
-        v-for="event in getListData(value)"
-        :key="event.id"
-        :event="event"
-        @showEvent="showModal"
-      />
-    </ul>
-  </a-calendar>
+      <a-calendar>
+        <ul slot="dateCellRender" slot-scope="value" class="events">
+          <Event
+            v-for="event in getListData(value)"
+            :key="event.id"
+            :event="event"
+            @showEvent="showModal"
+          />
+        </ul>
+      </a-calendar>
 
-  <a-modal
-    :title="event.title"
-    :visible="visible"
-    :confirm-loading="confirmLoading"
-    :ok-button-props="{ style: {display: 'none'} }"
-    cancel-text="Закрыть"
-    @ok="handleOk"
-    @cancel="handleCancel"
-  >
-    <div class="h5">Формат: <span class="text-violet h5">{{ event.format }}</span></div>
-    <div class="h5">Город: <span class="text-violet h5">{{ event.city }}</span></div>
-    <div class="h5">Описание</div>
-    <p>{{ event.body }}</p>
-    <div class="h5">Дата и время: {{event.day}}.{{event.month + 1}}.{{event.year}} в {{event.time}}</div>
+      <a-modal
+        :title="event.title"
+        :visible="visible"
+        :confirm-loading="confirmLoading"
+        :ok-button-props="{ style: {display: 'none'} }"
+        cancel-text="Закрыть"
+        @ok="handleOk"
+        @cancel="handleCancel"
+      >
+        <div class="h5">Формат: <span class="text-violet h5">{{ event.format }}</span></div>
+        <div class="h5">Город: <span class="text-violet h5">{{ event.city }}</span></div>
+        <div class="h5">Описание</div>
+        <p>{{ event.body }}</p>
+        <div class="h5">Дата и время: {{event.day}}.{{event.month + 1}}.{{event.year}} в {{event.time}}</div>
 
-  </a-modal>
-  <CreateEvent/>
-
-</div>
+      </a-modal>
+      <CreateEvent v-if="role === 'Ментор'" />
+    </a-col>
+  </a-row>
 </template>
 
 <script>
@@ -46,49 +47,11 @@ export default {
   },
   components: {CreateEvent, Event},
   data: () => ({
-    locale: {
-      "lang": {
-        "placeholder": "Select date",
-        "rangePlaceholder": ["Start date", "End date"],
-        "today": "Today",
-        "now": "Now",
-        "backToToday": "Back to today",
-        "ok": "Ok",
-        "clear": "Clear",
-        "month": "Месяц",
-        "year": "Год",
-        "timeSelect": "Выбрать время",
-        "dateSelect": "Выбрать дату",
-        "monthSelect": "Choose a month",
-        "yearSelect": "Choose a year",
-        "decadeSelect": "Choose a decade",
-        "yearFormat": "YYYY",
-        "dateFormat": "M/D/YYYY",
-        "dayFormat": "D",
-        "dateTimeFormat": "M/D/YYYY HH:mm:ss",
-        "monthFormat": "MMMM",
-        "monthBeforeYear": true,
-        "previousMonth": "Previous month (PageUp)",
-        "nextMonth": "Next month (PageDown)",
-        "previousYear": "Last year (Control + left)",
-        "nextYear": "Next year (Control + right)",
-        "previousDecade": "Last decade",
-        "nextDecade": "Next decade",
-        "previousCentury": "Last century",
-        "nextCentury": "Next century"
-      },
-      "timePickerLocale": {
-        "placeholder": "Выбрать время"
-      },
-      "dateFormat": "YYYY-MM-DD",
-      "dateTimeFormat": "YYYY-MM-DD HH:mm:ss",
-      "weekFormat": "YYYY-wo",
-      "monthFormat": "YYYY-MM"
-    },
     events: [],
     visible: false,
     confirmLoading: false,
-    event: {}
+    event: {},
+    role: ''
   }),
   methods: {
     getListData(value) {
@@ -117,9 +80,10 @@ export default {
     }
   },
   async mounted() {
+    this.role = this.$route.query.role
     await this.$store.dispatch('events/getEvents')
     this.events = this.$store.getters['events/events']
-  }
+  },
 }
 </script>
 
@@ -129,6 +93,7 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 .events .ant-badge-status {
   overflow: hidden;
   white-space: nowrap;
@@ -136,15 +101,17 @@ export default {
   text-overflow: ellipsis;
   font-size: 12px;
 }
+
 .notes-month {
   text-align: center;
   font-size: 28px;
 }
+
 .notes-month section {
   font-size: 28px;
 }
-.ant-radio-group .ant-radio-group-outline .ant-radio-group-default {
+
+.ant-radio-button-wrapper {
   display: none;
 }
-
 </style>

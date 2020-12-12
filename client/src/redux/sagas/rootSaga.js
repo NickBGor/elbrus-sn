@@ -9,10 +9,18 @@ import { editProfileSagaWatcher } from './profileSaga';
 import {
   addReviewSagaWatcher,
   createEmployerSagaWatcher,
+  deleteEmployerSagaWatcher,
   deleteReviewSagaWatcher,
   getEmployersSagaWatcher,
 } from './employerSaga';
-import { getAllItemsShopWatcher, shopSagaWatcher } from './shopSaga';
+import {
+  buyItemShopWatcher,
+  deleteItemShopWatcher,
+  deleteOrderWatcher,
+  getAllItemsShopWatcher,
+  getAllOrdersWatcher,
+  shopSagaWatcher,
+} from './shopSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -23,10 +31,15 @@ export default function* rootSaga() {
     getEmployersSagaWatcher(),
     createEmployerSagaWatcher(),
     deleteReviewSagaWatcher(),
+    deleteEmployerSagaWatcher(),
     editProfileSagaWatcher(),
     addReviewSagaWatcher(),
     checkTokenWatcher(),
     shopSagaWatcher(),
     getAllItemsShopWatcher(),
+    deleteItemShopWatcher(),
+    buyItemShopWatcher(),
+    getAllOrdersWatcher(),
+    deleteOrderWatcher(),
   ]);
 }

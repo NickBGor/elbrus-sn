@@ -4,20 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server:dev": "npm run server --prefix server",
-    "server:prod": "npm run start --prefix server",
+    "start": "npm run start --prefix server",
     "client": "npm run start --prefix client",
-    "client:build": "npm run build --prefix client",
+    "server": "npm run server --prefix server",
     "nuxt": "npm run dev --prefix nuxt",
-    "nuxt:build": "npm run build --prefix nuxt",
-    "nuxt:prod": "npm run start --prefix nuxt",
-    "deploy:client": "cd client && cd build && rsync --archive --compress --delete . root@80.249.146.235:/root/client/",
-    "deploy:nuxt": "cd nuxt && cd dist && rsync --archive --compress --delete . root@80.249.146.235:/root/nuxt/",
-    "dev": "concurrently \"npm run server:dev\" \"npm run client\" \"npm run nuxt\" ",
-    "build": "concurrently \"npm run client:build\" \"npm run nuxt:build\" ",
-    "deploy": "concurrently \"npm run deploy:client\" \"npm run deploy:nuxt\" ",
-    "prod": "concurrently \"npm run server:prod\" \"npm run nuxt:prod\" "
-
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run nuxt\" "
   },
   "keywords": [],
   "author": "",

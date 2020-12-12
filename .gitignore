@@ -1,3 +1,6 @@
+.client
+build
+
 # Logs
 .DS_Store
 .idea/

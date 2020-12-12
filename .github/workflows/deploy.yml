@@ -21,7 +21,7 @@ jobs:
       - run: mkdir "$HOME/.ssh"
       - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
-      - run: ssh-keyscan -H ${{secrets.DEPLOY_SERVER}} > "$HOME/.ssh/known_hosts"
+      - run: echo ssh-keyscan "${{secrets.DEPLOY_SERVER}}" > "$HOME/.ssh/known_hosts"
       - run: chmod 600 "$HOME/.ssh/known_hosts"
       # Build
       - run: npm ci

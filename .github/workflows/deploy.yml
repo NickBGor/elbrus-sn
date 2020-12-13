@@ -24,6 +24,11 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           name: id_rsa # optional
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          config: ${{ secrets.CONFIG }}
+            Host *
+              AddKeysToAgent yes
+              UseKeychain yes
+              IdentityFile ~/.ssh/id_rsa
 #      - run: set -eu
 #      - run: mkdir "$HOME/.ssh"
 #      - run: echo "${{ secrets.SSH_KEY }}" > "$HOME/.ssh/id_rsa"

@@ -23,8 +23,8 @@ jobs:
       - run: echo "${{ secrets.KEY }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
       - run: echo "$SSH_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
-      - shell: bash
-      - env:
+        shell: bash
+        env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
           SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
           SSH_KEY_PATH: $HOME/.ssh/key

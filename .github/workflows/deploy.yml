@@ -18,24 +18,16 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       # Setup key
-#      - run: set -eu
-#      - run: mkdir "$HOME/.ssh"
-#      - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
-#      - run: chmod 600 "$HOME/.ssh/key"
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "${{ secrets.KEY }}" > "$HOME/.ssh/key"
+      - run: chmod 600 "$HOME/.ssh/key"
       # Build
-#      - run: npm ci
-#      - run: cd server && npm ci
-#      - run: cd ..
+      - run: npm ci
+      - run: cd server && npm ci
+      - run: cd ..
       - run: cd client && npm ci
       - run: cd ..
       - run: npm run client:build
       # Deploy
-      - uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.KEY }}
-          ARGS: "--archive --compress --delete"
-          SOURCE: "client/build/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-#      - run: cd client && cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
+      - run: cd client && cd build && rsync -e "ssh -i "$HOME/.ssh/key" -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build

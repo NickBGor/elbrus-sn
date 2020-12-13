@@ -5,7 +5,7 @@ import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import {
   DollarCircleOutlined,
   LogoutOutlined,
-  NotificationOutlined,
+  // NotificationOutlined,
   OrderedListOutlined,
   ShopOutlined,
   UserOutlined,
@@ -74,16 +74,16 @@ const LayoutComponent = () => {
               >
                 <Link to="/students">Рейтинг студентов</Link>
               </Menu.Item>
-              <Menu.Item
-                key="4"
-                icon={<NotificationOutlined className={style.iconColor} />}
-              >
-                <a
-                  href={`${process.env.REACT_APP_URL_DEFAULT}:4000/events?role=${user.status}`}
-                >
-                  Эвенты не работают
-                </a>
-              </Menu.Item>
+              {/*<Menu.Item*/}
+              {/*  key="4"*/}
+              {/*  icon={<NotificationOutlined className={style.iconColor} />}*/}
+              {/*>*/}
+              {/*  <a*/}
+              {/*    href={`${process.env.REACT_APP_URL_DEFAULT}:4000/events?role=${user.status}`}*/}
+              {/*  >*/}
+              {/*    Эвенты не работают*/}
+              {/*  </a>*/}
+              {/*</Menu.Item>*/}
               {user.status === 'Гость' ? null : (
                 <Menu.Item
                   key="5"

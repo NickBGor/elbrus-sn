@@ -22,15 +22,17 @@ jobs:
       - run: mkdir "$HOME/.ssh"
       - run: echo "${{ secrets.KEY }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
-      - run: echo "$SSH_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
-        shell: bash
-        env:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
-          SSH_KEY_PATH: $HOME/.ssh/key
       # Build
       - run: cd client && npm ci
       - run: cd ..
       - run: npm run client:build
       # Deploy
-      - run: cd client && cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
+      - uses: easingthemes/ssh-deploy@v2.1.5
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.KEY }}
+            ARGS: "--archive --compress --delete"
+            SOURCE: "client/build"
+            REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+            REMOTE_USER: ${{ secrets.REMOTE_USER }}
+            TARGET: ${{ secrets.REMOTE_TARGET }}
+#      - run: cd client && cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build

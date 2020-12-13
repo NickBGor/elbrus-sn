@@ -18,20 +18,19 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       # Setup key
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          name: id_rsa # optional
-          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-#      - run: set -eu
-#      - run: mkdir "$HOME/.ssh"
-#      - run: echo "${{ secrets.SSH_KEY }}" > "$HOME/.ssh/key"
-#      - run: chmod 600 "$HOME/.ssh/key"
+#      - name: Install SSH key
+#        uses: shimataro/ssh-key-action@v2
+#        with:
+#          key: ${{ secrets.SSH_KEY }}
+#          name: id_rsa # optional
+#          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "${{ secrets.SSH_KEY }}" > "$HOME/.ssh/key"
+      - run: chmod 600 "$HOME/.ssh/key"
       # Build
       - run: cd client && npm ci
       - run: cd ..
       - run: npm run client:build
       # Deploy
-#      - run: cd client && cd build && rsync --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
-      - run: cd client && cd build && rsync -e "ssh -i $HOME/.ssh/id_rsa" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
+      - run: cd client && cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build

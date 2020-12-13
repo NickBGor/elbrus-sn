@@ -21,9 +21,9 @@ jobs:
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
       - run: echo "${{ secrets.KEY }}" > "$HOME/.ssh/key"
-      - run: chmod 600 "$HOME/.ssh/key"
+      - run: sudo chmod 600 "$HOME/.ssh/key"
       - run: echo "${{ secrets.SSH_KNOWN_HOSTS }}" > "$HOME/.ssh/known_hosts"
-      - run: chmod 600 "$HOME/.ssh/known_host"
+      - run: sudo chmod 600 "$HOME/.ssh/known_host"
       # Build
       - run: cd client && npm ci
       - run: cd ..

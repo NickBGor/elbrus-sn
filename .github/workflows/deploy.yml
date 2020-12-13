@@ -32,7 +32,7 @@ jobs:
       # Deploy
       - uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.key }}
+          SSH_PRIVATE_KEY: ${{ secrets.KEY }}
           ARGS: "--archive --compress --delete"
           SOURCE: "client/build/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}

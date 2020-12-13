@@ -39,11 +39,11 @@ jobs:
       - run: npm run client:build
       # Deploy
       - uses: easingthemes/ssh-deploy@v2.1.5
-          env:
-            SSH_PRIVATE_KEY: ${{ secrets.key }}
-            ARGS: "--archive --compress --delete"
-            SOURCE: "client/build/"
-            REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-            REMOTE_USER: ${{ secrets.REMOTE_USER }}
-            TARGET: ${{ secrets.REMOTE_TARGET }}
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.key }}
+          ARGS: "--archive --compress --delete"
+          SOURCE: "client/build/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
 #      - run: cd client && cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build

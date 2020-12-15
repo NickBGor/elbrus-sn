@@ -27,12 +27,12 @@ jobs:
 #          config: ${{ secrets.CONFIG }}
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
-      - run: echo ${{ secrets.SSH_KEY }} > "$HOME/.ssh/id_rsa"
+      - run: echo "${{ secrets.SSH_KEY }}" > "$HOME/.ssh/id_rsa"
       - run: chmod 600 "$HOME/.ssh/id_rsa"
       # Build
       - run: cd client && npm ci
       - run: cd ..
       - run: npm run client:build
       # Deploy
-      - run: cd client && cd build && rsync -e "ssh -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
+      - run: cd client/build && rsync -e "ssh -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
 #      - run: cd client && cd build && rsync --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build

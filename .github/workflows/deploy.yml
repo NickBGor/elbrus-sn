@@ -27,7 +27,7 @@ jobs:
 #          config: ${{ secrets.CONFIG }}
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
-      - run: echo "${{ secrets.SSH_KEY }}" > "$HOME/.ssh/id_rsa"
+      - run: echo ${{ secrets.SSH_KEY }} > "$HOME/.ssh/id_rsa"
       - run: chmod 600 "$HOME/.ssh/id_rsa"
       # Build
       - run: cd client && npm ci

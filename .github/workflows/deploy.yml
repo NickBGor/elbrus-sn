@@ -18,13 +18,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       # Setup key
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          name: id_rsa # optional
-          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-          config: ${{ secrets.CONFIG }}
+#      - name: Install SSH key
+#        uses: shimataro/ssh-key-action@v2
+#        with:
+#          key: ${{ secrets.SSH_KEY }}
+#          name: id_rsa # optional
+#          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+#          config: ${{ secrets.CONFIG }}
 #      - run: set -eu
 #      - run: mkdir "$HOME/.ssh"
 #      - run: echo "${{ secrets.SSH_KEY }}" > "$HOME/.ssh/id_rsa"
@@ -33,6 +33,15 @@ jobs:
       - run: cd client && npm ci
       - run: cd ..
       - run: npm run client:build
+      - name: deploy to Server
+          uses: easingthemes/ssh-deploy@v2.1.5
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+            ARGS: "--archive --compress --delete"
+            SOURCE: "client/build"
+            REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+            REMOTE_USER: ${{ secrets.REMOTE_USER }}
+            TARGET: ${{ secrets.REMOTE_TARGET }}
       # Deploy
 #      - run: cd client/build && rsync -e "ssh -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
-      - run: cd client && cd build && rsync --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
+#      - run: cd client && cd build && rsync --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build

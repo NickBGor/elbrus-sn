@@ -18,7 +18,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       # Setup key
-      - run: ls -la
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
@@ -30,10 +29,11 @@ jobs:
 #      - run: mkdir "$HOME/.ssh"
 #      - run: echo "${{ secrets.SSH_KEY }}" > "$HOME/.ssh/id_rsa"
 #      - run: chmod 600 "$HOME/.ssh/id_rsa"
+      - run: echo "$HOME/.ssh/id_rsa"
       # Build
       - run: cd client && npm ci
       - run: cd ..
-      - run: npm run client:build
+#      - run: npm run client:build
       # Deploy
-      - run: cd client/build && rsync -e "ssh -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
+#      - run: cd client/build && rsync -e "ssh -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
 #      - run: cd client && cd build && rsync --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build

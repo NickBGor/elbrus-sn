@@ -11,7 +11,7 @@
     "nuxt:dev": "npm run dev --prefix nuxt",
     "nuxt:build": "npm run build --prefix nuxt",
     "server:dev": "npm run dev --prefix server",
-    "dev": "concurrently \"npm run server:dev\" \"npm run client\" \"npm run nuxt:dev\"",
+    "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
     "deploy": "cd client && cd build && rsync --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build"
   },
   "keywords": [],

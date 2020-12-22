@@ -35,14 +35,14 @@ jobs:
       - run: cd client && npm ci
       - run: cd ..
       - run: npm run client:build
-      - uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "--archive --compress --delete"
-          SOURCE: "client/build"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
+#      - uses: easingthemes/ssh-deploy@v2.1.5
+#        env:
+#          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+#          ARGS: "--archive --compress --delete"
+#          SOURCE: "client/build"
+#          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+#          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+#          TARGET: ${{ secrets.REMOTE_TARGET }}
       # Deploy
       - run: cd client/build && rsync -e "ssh -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no" --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build
 #      - run: cd client && cd build && rsync --archive --compress --delete . root@84.38.181.170:/root/elbrus-sn/client/build

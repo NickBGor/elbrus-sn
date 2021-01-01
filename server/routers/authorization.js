@@ -75,7 +75,7 @@ router
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({
-          error: errors.array(),
+          errors: errors.array(),
           message: 'Некорректные данные при входе в систему',
         });
       }
